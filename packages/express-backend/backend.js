@@ -48,10 +48,20 @@ const findUserByName = (name) => {
   return users["users_list"].filter((user) => user["name"] === name);
 };
 
+const findUserByIdAndJob = (id, job) =>
+  users["users_list"].find((user) => user["id"] === id && user["job"] === job);
+
 app.get("/users", (req, res) => {
   const name = req.query.name;
+  const id = req.query.id;
+  const job = req.query.job;
+
   if (name != undefined) {
     let result = findUserByName(name);
+    result = { users_list: result };
+    res.send(result);
+  } else if (id != undefined && job != undefined) {
+    let result = findUserByIdAndJob(id, job);
     result = { users_list: result };
     res.send(result);
   } else {
