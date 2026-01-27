@@ -8,27 +8,27 @@ function MyApp() {
   const [characters, setCharacters] = useState([]);
 
   function deleteUser(id) {
-  return fetch(`http://localhost:8000/users/${id}`, {
-    method: "DELETE",
-  });
-}
+    return fetch(`http://localhost:8000/users/${id}`, {
+      method: "DELETE",
+    });
+  }
 
   function removeOneCharacter(index) {
     const userToDelete = characters[index];
-  const id = userToDelete.id;
+    const id = userToDelete.id;
 
-  deleteUser(id)
-    .then((res) => {
-      if (res.status === 204) {
-        const updated = characters.filter((j, i) => i !== index);
-        setCharacters(updated);
-      } else if (res.status === 404) {
-        console.log("User not found");
-      } else {
-        console.log("Delete failed.");
-      }
-    })
-    .catch((error) => console.log(error));
+    deleteUser(id)
+      .then((res) => {
+        if (res.status === 204) {
+          const updated = characters.filter((j, i) => i !== index);
+          setCharacters(updated);
+        } else if (res.status === 404) {
+          console.log("User not found");
+        } else {
+          console.log("Delete failed.");
+        }
+      })
+      .catch((error) => console.log(error));
   }
 
   function fetchUsers() {
@@ -53,7 +53,7 @@ function MyApp() {
       .then((res) => {
         if (res.status !== 201) {
           throw new Error("Failed to add user");
-        } 
+        }
         return res.json();
       })
       .then((mewUser) => {
