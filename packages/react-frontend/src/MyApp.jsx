@@ -15,7 +15,7 @@ function MyApp() {
 
   function removeOneCharacter(index) {
     const userToDelete = characters[index];
-    const id = userToDelete.id;
+    const id = userToDelete._id;
 
     deleteUser(id)
       .then((res) => {
